@@ -60,6 +60,7 @@ dl.page-topic dd a{color:#333333;}
 /* 论坛-文章列表 */
 ul.topic-list{padding:0;}
 ul.topic-list li{zoom:1;*zoom:1;border-top:1px dashed #a1a1a1;padding:10px 0;list-style:none;}
+ul.topic-list li:first-child{border-top:none;}
 ul.topic-list li:after{display:block;clear:both;font-size:0;line-height:0;content:'.';visibility:hidden;}
 ul.topic-list li>a{}
 ul.topic-list li>a img{height:50px;width:50px;}
