@@ -44,7 +44,7 @@ let ParamsManager = function (wn) {
     /**
      * 获取触发器参数
      * @param $trigger
-     * @returns {boolean}
+     * @returns {object}
      */
     this.getOption = function ($trigger) {
         if (!H.isDefined($trigger)) {
@@ -257,6 +257,12 @@ let Loader = {
                 $triggers.validate();
             });
     },
+    hideShow: function ($triggers) {
+        this.__loadPlugin('hideShow',
+            '/plugins/hideShow/jquery.hideShow.js', function () {
+                $triggers.hideShow();
+            });
+    },
     configs: {
         'dropdown': '.w-dropdown',
         'navbar': '.w-navbar',
@@ -271,6 +277,7 @@ let Loader = {
         'menu': '.w-menu',
         'dateRange': '.w-dateRange',
         'validate': '.w-validate',
+        'hideShow': '.w-hideShow',
         'template': '.w-template'
     }
 };
