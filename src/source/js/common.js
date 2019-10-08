@@ -63,25 +63,19 @@ let PL = {
             }
         });
         return false;
-    }
-};
-
-jQuery(function () {
-    /**
-     * modal 定制的js
-     */
-    // 关闭父页面 modal
-    $('.MODAL-CLOSE').on('click', function (e) {
+    },
+    /* 关闭父页面 modal */
+    modalClose: function (e) {
         parent.modal.hide(true);
         H.preventDefault(e);
-    });
-    // 关闭父页面 modal, 并刷新父页面
-    $('.MODAL-CLOSE-RELOAD').on('click', function (e) {
+    },
+    /* 关闭父页面 modal, 并刷新父页面 */
+    modalCloseReload: function (e) {
         parent.modal.hide(false, true);
         H.preventDefault(e);
-    });
-    // 关闭父页面 modal, 并执行父页面 modal 的回调函数
-    $('.MODAL-CLOSE-CALLBACK').on('click', function (e) {
+    },
+    /* 关闭父页面 modal, 并执行父页面 modal 的回调函数 */
+    modalCloseCallback: function (e) {
         let callback = $(this).data('callback');
         if (H.isDefined(callback)) {
             callback = H.toJson(callback);
@@ -90,7 +84,7 @@ jQuery(function () {
             parent.modal.hide(true);
         }
         H.preventDefault(e);
-    });
+    },
     /**
      * action、confirm 、ajax 综合定制
      * 支持参数
@@ -100,7 +94,7 @@ jQuery(function () {
      *      post-data : ajax传递的post请求参数
      *      callback : ajax 执行完后的回调函数
      */
-    $('.ACTION-HREF').on('click', function (e) {
+    actionHref: function (e) {
         let $this = $(this);
         let data = $this.data();
         if (H.isDefined(data.beforeCallback)) {
@@ -157,5 +151,27 @@ jQuery(function () {
         });
         H.preventDefault(e);
         return false;
-    });
+    }
+};
+
+jQuery(function () {
+    /**
+     * modal 定制的js
+     */
+    // 关闭父页面 modal
+    $('.MODAL-CLOSE').on('click', PL.modalClose);
+    // 关闭父页面 modal, 并刷新父页面
+    $('.MODAL-CLOSE-RELOAD').on('click', PL.modalCloseReload);
+    // 关闭父页面 modal, 并执行父页面 modal 的回调函数
+    $('.MODAL-CLOSE-CALLBACK').on('click', PL.modalCloseCallback);
+    /**
+     * action、confirm 、ajax 综合定制
+     * 支持参数
+     *      beforeCallback : 执行前调用函数，返回非true将终止后续执行
+     *      message : 一旦设置message，将使用 window.confirm 函数让用户确认是否继续操作
+     *      is-ajax : 一旦设置属性，请求将通过走ajax的方式来执行指定中的连接
+     *      post-data : ajax传递的post请求参数
+     *      callback : ajax 执行完后的回调函数
+     */
+    $('.ACTION-HREF').on('click', PL.actionHref);
 });
